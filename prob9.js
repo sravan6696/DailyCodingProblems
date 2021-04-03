@@ -1,0 +1,25 @@
+// Given a list of integers, write a function that returns the largest sum of non-adjacent numbers. Numbers can be 0 or negative.
+// For example, [2, 4, 6, 2, 5] should return 13, since we pick 2, 6, and 5. [5, 1, 1, 5] should return 10, since we pick 5 and 5.
+// Follow-up: Can you do this in O(N) time and constant space?
+
+
+function sum(A) {
+    var largestIncluding = 0, largestExcluding = 0;
+
+    for(var i=0;i<A.length;i++){
+        largestIncluding += A[i];
+
+        var temp = largestIncluding;
+        largestIncluding = largestExcluding;
+        largestExcluding = temp;
+
+    }
+
+    return Math.max(largestExcluding, largestIncluding);
+
+}
+
+
+var A = [2,4,6,8,1];
+
+console.log(sum(A));

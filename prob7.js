@@ -4,27 +4,19 @@
 
 // You can assume that the messages are decodable. For example, '001' is not allowed.
 
+function decode(A) {
+    var decodeArray = new Array(A.length+1);
 
-function decode(A, end) {
-    var ans = 0;
-    if(end == -1 || end == 0) return 1;
+    decodeArray[0] = 1;
+    decodeArray[1] = 1;
 
-    var a = A[end], b = A.substr(end-1,end+1);
-
-    if (a != '0') {
-        ans += decode(A, end-1);
+    for(i=2;i<=A.length;i++){
+        if (A[i-1] != '0') decodeArray[i] = decodeArray[i-1];
+        if (A.substr(i-2,i) >= '11' && A.substr(i-2,i) <= '26') decodeArray[i] += decodeArray[i-2];
     }
 
-    if (b <= 26 && b >= 11){
-        ans += decode(A, end-2);
-    }
-    
-    return ans;
+    return decodeArray[A.length];
 }
 
-function decode_helper(A) {
-    return decode(A, A.length-1);
-}
-
-console.log(decode_helper('1111')); // aaaa, aak, aka, kaa, kk
-console.log(decode_helper('111'));
+console.log(decode('1234')); // aaaa, aak, aka, kaa, kk
+// console.log(decode_helper('111'));
