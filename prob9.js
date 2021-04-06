@@ -20,6 +20,6 @@ function sum(A) {
 }
 
 
-var A = [2,4,6,8,1];
+var A = [5,  5, 10, 40];
 
 console.log(sum(A));
